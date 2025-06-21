@@ -18,7 +18,7 @@ lib.callback.register("walter-drugs:server:reward:player", function(source, drug
         return false
     end
 
-    exports.ox_inventory:AddItem(src, data.item, data.amount)
+    exports.ox_inventory:AddItem(src, data.item, math.random(3, 8))
 
     return true
 end)
