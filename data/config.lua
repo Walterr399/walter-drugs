@@ -1,6 +1,6 @@
 local Config = {}
 
-Config.Framework = "ESX"
+Config.Framework = "ESX" -- [ ESX, QBCore ] 
 
 Config.Configuration = {
     ["weed"] = {
