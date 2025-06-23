@@ -24,8 +24,20 @@ lib.callback.register("walter-drugs:server:reward:player", function(source, drug
         local Player = QBCore.Functions.GetPlayer(src)
         if not Player then return false end
     end
-
-    exports.ox_inventory:AddItem(src, data.item, math.random(3, 8))
+        
+    local amount = math.random(3, 8)
+        
+    if amount < 3 or amount > 8 then
+        if Config.Anticheat == "ElectronAC" then
+            exports["ElectronAC"]:banPlayer(src, "Drugs exploit", "Drugs exploit", true)
+        elseif Config.Anticheat == "FiveGuard" then
+            exports["fiveguard"]:fg_BanPlayer(src, "Drugs - Exploit", true)
+        end
+            
+        DropPlayer(src, "Exploit")
+        return
+    end
+    exports.ox_inventory:AddItem(src, data.item, amount)
     return true
 end)
 
