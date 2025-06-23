@@ -1,5 +1,6 @@
 local Config = lib.callback.await("walter-drugs:server:send:data", false)
 
+--# Add/Change messages (Optionally)
 local messages = {
     "Je trok aan die plant alsof het je wifi-kabel was niks geplukt, alles verpest.",
     "Plant zei letterlijk ‘nee broer, niet vandaag’.",
@@ -11,17 +12,13 @@ local messages = {
 local spawnedObjects = {}
 
 for drugType, data in pairs(Config.Configuration) do
-    local coords = data.location
-    local radius = data.radius
-    local model = data.prop
-
     local point = lib.points.new({
-        coords = coords,
-        distance = radius
+        coords = data.coords,
+        distance = data.radius
     })
 
     function point:onEnter()
-        spawnPlants(drugType, coords, model, data)
+        spawnPlants(drugType, coords, data.model, data)
     end
 
     function point:onExit()
@@ -38,11 +35,11 @@ function spawnPlants(drugType, baseCoords, plantModel, data)
 
     lib.requestModel(plantModel, 5000)
 
-    local plantCount = math.random(data.minPlants, data.maxPlants)
+    local count = math.random(data.minPlants, data.maxPlants)
 
     spawnedObjects[drugType] = {}
 
-    for i = 1, plantCount do
+    for i = 1, count do
         SetTimeout(i * 1000, function()
             local radius = data.radius or vx.print.debug("radius is not fetched.")
             local angle = math.random() * math.pi * 2
@@ -71,7 +68,7 @@ function spawnPlants(drugType, baseCoords, plantModel, data)
                                 description = "Je probeert planten te plukken van 3 meter afstand ben je shi tovenaar ofzo?",
                                 type = "error"
                             })
-                            --# Add ban logic
+                            TriggerServerEvent("walter-drugs:server:ban", drugType)
                             return
                         end
 

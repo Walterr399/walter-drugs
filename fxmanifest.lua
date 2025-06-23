@@ -6,10 +6,14 @@ games {
 }
 
 author "Walter"
+description "A simple drugs system built for fivem (QBCore & ESX)"
+
+dependency "ox_lib"
 
 shared_scripts {
     "@ox_lib/init.lua",
-    "@es_extended/imports.lua"
+    "@es_extended/imports.lua", -- ESX (optional)
+    "@qb-core/shared/locale.lua" -- QBCore (optional)
 }
 
 client_scripts {
