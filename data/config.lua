@@ -1,6 +1,8 @@
 local Config = {}
 
-Config.Framework = "ESX" -- [ ESX, QBCore ] 
+Config.Framework = "ESX" --# [ ESX, QBCore ]
+
+Config.Anticheat = "ElectronAC" --# Optional: [ "ElectronAC", "FiveGuard" ]
 
 Config.Configuration = {
     ["weed"] = {
