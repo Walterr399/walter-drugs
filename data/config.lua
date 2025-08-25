@@ -1,8 +1,6 @@
 local Config = {}
 
-Config.Framework = "ESX" --# [ ESX, QBCore ]
-
-Config.Anticheat = "ElectronAC" --# Optional: [ "ElectronAC", "FiveGuard" ]
+Config.Anticheat = "ElectronAC" -- Options: [ "ElectronAC", "FiveGuard" ]
 
 Config.Configuration = {
     ["weed"] = {
@@ -14,6 +12,14 @@ Config.Configuration = {
         maxPlants = 25,
         respawnTime = 300
     }
+}
+
+Config.Messages = {
+    "Je trok aan die plant alsof het je wifi-kabel was niks geplukt, alles verpest.",
+    "Plant zei letterlijk ‘nee broer, niet vandaag’.",
+    "Je handen waren te glad van de olie, je gleed gewoon langs de bladeren.",
+    "Broer, dit is geen boksbal zachtjes plukken, niet meppen.",
+    "Plant is gevlucht, zei: ‘ik ga wel groeien bij iemand met respect’."
 }
 
 return Config
