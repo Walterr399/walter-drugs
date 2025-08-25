@@ -1,14 +1,5 @@
+
 local Config = lib.callback.await("walter-drugs:server:send:data", false)
-
---# Add/Change messages (Optionally)
-local messages = {
-    "Je trok aan die plant alsof het je wifi-kabel was niks geplukt, alles verpest.",
-    "Plant zei letterlijk ‘nee broer, niet vandaag’.",
-    "Je handen waren te glad van de olie, je gleed gewoon langs de bladeren.",
-    "Broer, dit is geen boksbal zachtjes plukken, niet meppen.",
-    "Plant is gevlucht, zei: ‘ik ga wel groeien bij iemand met respect’."
-}
-
 local spawnedObjects = {}
 
 for drugType, data in pairs(Config.Configuration) do
@@ -41,7 +32,7 @@ function spawnPlants(drugType, baseCoords, plantModel, data)
 
     for i = 1, count do
         SetTimeout(i * 1000, function()
-            local radius = data.radius or vx.print.debug("radius is not fetched.")
+            local radius = data.radius
             local angle = math.random() * math.pi * 2
             local distance = math.sqrt(math.random()) * radius
             local offsetX = math.cos(angle) * distance
@@ -75,7 +66,7 @@ function spawnPlants(drugType, baseCoords, plantModel, data)
                         local success = lib.skillCheck({ 'easy', 'easy' }, { 'e', 'e' })
 
                         if not success then
-                            local message = messages[math.random(1, #messages)]
+                            local message = messages[math.random(1, #Config.Messages)]
                             lib.notify({
                                 title = "Wallahi nee!",
                                 description = message,
@@ -121,8 +112,6 @@ function spawnPlants(drugType, baseCoords, plantModel, data)
             })
         end)
     end
-
-    --SetModelAsNoLongerNeeded(joaat(plantModel))
 end
 
 function despawnPlants()
