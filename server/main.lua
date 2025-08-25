@@ -1,13 +1,4 @@
-local Config = require("data.config")
-
-local ESX = nil
-local QBCore = nil
-
-if Config.Framework == "ESX" then
-    ESX = exports["es_extended"]:getSharedObject()
-elseif Config.Framework == "QBCore" then
-    QBCore = exports["qb-core"]:GetCoreObject()
-end
+local Config = require "data.config"
 
 -- [[ CALLBACKS ]] --
 lib.callback.register("walter-drugs:server:reward:player", function(source, drugType)
@@ -18,14 +9,6 @@ lib.callback.register("walter-drugs:server:reward:player", function(source, drug
         return false
     end
 
-    if Config.Framework == "ESX" then
-        local xPlayer = ESX.GetPlayerFromId(src)
-        if not xPlayer then return false end
-    elseif Config.Framework == "QBCore" then
-        local Player = QBCore.Functions.GetPlayer(src)
-        if not Player then return false end
-    end
-        
     local amount = math.random(3, 8)
         
     if amount < 3 or amount > 8 then
@@ -54,14 +37,6 @@ RegisterNetEvent("walter-drugs:server:ban", function(drugType)
     if not Config.Configuration[drugType] then
         DropPlayer(src, "Invalid exploit attempt.")
         return
-    end
-
-    if Config.Framework == "ESX" then
-        local xPlayer = ESX.GetPlayerFromId(src)
-        if not xPlayer then return end
-    elseif Config.Framework == "QBCore" then
-        local Player = QBCore.Functions.GetPlayer(src)
-        if not Player then return end
     end
 
     local reason = string.format("Tried to exploit plant harvest (%s) from too far", drugType)
